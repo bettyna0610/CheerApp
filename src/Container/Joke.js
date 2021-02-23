@@ -83,7 +83,7 @@ export const JokePage = () => {
           
        
               </div>
-              <div  className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5">{joke}</div>
+              {joke && <div  className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5">{joke}</div> }
              
               
 

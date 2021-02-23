@@ -11,7 +11,7 @@ export const Navigation = () => {
           <Link to="/" style={{ color:"black",marginRight:5}}>Home</Link>
           <Link to="/jokes" style={{ color:"black",marginRight:5}}>Joke </Link>
           <Link to="/quotes" style={{ color:"black",marginRight:5}}>Quotes</Link>
-            
+          <Link to="/gifs" style={{ color:"black",marginRight:5}}>Gifs</Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
