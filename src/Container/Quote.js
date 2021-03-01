@@ -11,12 +11,12 @@ export const Quote = () => {
     const quotePerPage = 20
     
     useEffect (() => {
-        fetch('https://type.fit/api/quotes')
+        fetch('https://goquotes-api.herokuapp.com/api/v1/all/quotes')
         .then(response => response.json())
         .then(data => {
              // let quotesArray = data.map(quote =><li className="list-group-item">{`,,${quote.text}"`} <i>{quote.author}</i></li>)
-             setQuotes(data)
-             setTotalQuote(data.length)
+             setQuotes(data.quotes)
+             setTotalQuote(data.count)
         
     })
    
@@ -31,13 +31,23 @@ export const Quote = () => {
   }
 
     const getQuoteOfDay = () => {
+        /*
        console.log(quotes.length)
        const random = Math.floor(Math.random()* quotes.length) 
        console.log(random)
        let quoteOfDay = quotes[random]
 
        setQuote(<div>{`,,${quoteOfDay.text}"`} <i>{quoteOfDay.author}</i></div>)
-       console.log(quoteOfDay)
+       console.log(quoteOfDay)*/
+       fetch('https://quotes.rest/qod.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.contents.quotes[0].quote)
+             // let quotesArray = data.map(quote =><li className="list-group-item">{`,,${quote.text}"`} <i>{quote.author}</i></li>)
+             setQuote(data.contents.quotes[0].quote)
+             
+        
+    })
     }
 
     return (

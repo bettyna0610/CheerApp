@@ -51,11 +51,17 @@ export const JokePage = () => {
 
    const  onClickProgramming = () => {
         let progJoke;
-    fetch(' https://v2.jokeapi.dev/joke/programming')
+    fetch('https://v2.jokeapi.dev/joke/programming')
   .then(response => response.json())
   .then(data => {
-       progJoke = data.joke
+       if (data.joke) {
+        progJoke = data.joke
+       } else {
+         progJoke = `${data.setup} ${data.delivery}`
+       }
+       
        setJoke(progJoke)
+       console.log(progJoke)
   }
  
   )
