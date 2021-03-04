@@ -7,12 +7,16 @@ import {ButtonProgramming} from './ButtonProgramming'
 export const JokePage = () => {
 
     const [joke,setJoke] = useState("")
+    const [loading,setLoading] = useState(false)
+
 
     const onClick = () => {
+      setLoading(true)
         let dailyJoke;
     fetch('https://api.jokes.one/jod')
   .then(response => response.json())
   .then(data => {
+    setLoading(false)
     console.log(data)
        dailyJoke = data.contents.jokes[0].joke.text
        setJoke(dailyJoke)
@@ -23,10 +27,12 @@ export const JokePage = () => {
     }
 
    const  onClickChuck = () => {
+    setLoading(true)
         let chuckJoke;
     fetch('https://api.chucknorris.io/jokes/random')
   .then(response => response.json())
   .then(data => {
+    setLoading(false)
        chuckJoke = data.value
        setJoke(chuckJoke)
   }
@@ -36,10 +42,12 @@ export const JokePage = () => {
 
 
     const onClickPun = () => {
+      setLoading(true)
         let punJoke;
     fetch(' https://v2.jokeapi.dev/joke/pun')
   .then(response => response.json())
   .then(data => {
+    setLoading(false)
        console.log(data)
        punJoke = data.setup + data.delivery
        console.log(punJoke)
@@ -50,10 +58,12 @@ export const JokePage = () => {
     }
 
    const  onClickProgramming = () => {
+    setLoading(true)
         let progJoke;
     fetch('https://v2.jokeapi.dev/joke/programming')
   .then(response => response.json())
   .then(data => {
+    setLoading(false)
        if (data.joke) {
         progJoke = data.joke
        } else {
@@ -89,7 +99,12 @@ export const JokePage = () => {
           
        
               </div>
-              {joke && <div  className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5">{joke}</div> }
+              {  loading ?
+   <div className="text-center"><div
+    className=" spinner-border text-warning" role="status"></div>
+   </div> :
+    <div  className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5">
+      {joke}</div> }
              
               
 

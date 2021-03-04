@@ -7,6 +7,7 @@ export const Quote = () => {
     const [quoteDay,setQuote] = useState("")
     const [totalQuote, setTotalQuote] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
+    const [loading,setLoading] = useState(false)
 
     const quotePerPage = 20
     
@@ -14,6 +15,7 @@ export const Quote = () => {
         fetch('https://goquotes-api.herokuapp.com/api/v1/all/quotes')
         .then(response => response.json())
         .then(data => {
+            setLoading(true)
              // let quotesArray = data.map(quote =><li className="list-group-item">{`,,${quote.text}"`} <i>{quote.author}</i></li>)
              setQuotes(data.quotes)
              setTotalQuote(data.count)
@@ -31,30 +33,34 @@ export const Quote = () => {
   }
 
     const getQuoteOfDay = () => {
-        /*
-       console.log(quotes.length)
-       const random = Math.floor(Math.random()* quotes.length) 
+        
+       console.log(totalQuote)
+       const random = Math.floor(Math.random()* totalQuote) 
        console.log(random)
        let quoteOfDay = quotes[random]
-
+       
+       console.log(quoteOfDay)
+        /*
        setQuote(<div>{`,,${quoteOfDay.text}"`} <i>{quoteOfDay.author}</i></div>)
-       console.log(quoteOfDay)*/
+       console.log(quoteOfDay)
        fetch('https://quotes.rest/qod.json')
         .then(response => response.json())
         .then(data => {
             console.log(data.contents.quotes[0].quote)
              // let quotesArray = data.map(quote =><li className="list-group-item">{`,,${quote.text}"`} <i>{quote.author}</i></li>)
-             setQuote(data.contents.quotes[0].quote)
+              setQuote(data.contents.quotes[0].quote)  })*/
+              
              
         
-    })
+   
+    setQuote(<li className="list-group-item">{`,,${quoteOfDay.text}"`} <i>{quoteOfDay.author}</i></li>)
     }
 
     return (
         <div style={{marginTop:"80px"}} >
             <div className="row m-5">
                 <div className="col-3">
-                <button onClick={getQuoteOfDay} className="btn btn-warning ">Get quote of the day:</button> 
+                <button onClick={getQuoteOfDay} className="btn btn-warning ">Get a quote:</button> 
                 </div>
                 <div className="col-9">
                { quoteDay}
@@ -63,7 +69,9 @@ export const Quote = () => {
             </div>
            
             <ul className="list-group list-group-flush m-5">
-            {currentQuotes.map(quote =><li className="list-group-item">{`,,${quote.text}"`} <i>{quote.author}</i></li>)}
+            { !loading ?
+   <div className="text-center"><div style={{marginTop:"200px", width:"100px",height:"100px"}} className=" spinner-border text-warning" role="status"></div>
+   </div> : currentQuotes.map(quote =><li className="list-group-item">{`,,${quote.text}"`} <i>{quote.author}</i></li>)}
             </ul>
             <div className="row justify-content-center">
             <ReactPaginate pageCount={Math.ceil(totalQuote/quotePerPage)} pageRangeDisplayed={2} marginPagesDisplayed={1} onPageChange={(data) => paginate(data.selected + 1)} containerClassName="pagination"

@@ -14,10 +14,10 @@ export class Container extends React.Component {
 
     render() {
         return (
-          <div style={{marginTop:200}}>
-             hello
+          <h3 className="center" style={{marginTop:200}}>
+             Cheer up with the best jokes, quotes and funniest gifs on our site!
               
-            </div>
+            </h3>
         )
     }
 }
