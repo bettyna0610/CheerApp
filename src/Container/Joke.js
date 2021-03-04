@@ -99,12 +99,16 @@ export const JokePage = () => {
           
        
               </div>
-              {  loading ?
-   <div className="text-center"><div
-    className=" spinner-border text-warning" role="status"></div>
-   </div> :
-    <div  className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5">
-      {joke}</div> }
+              <div className="row justify-content-center">
+             
+              {  loading ? <div className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5">
+  <div
+    className="spinner-border text-warning text-center" role="status"></div>
+   </div> : joke && <div className="font-weight-bold rounded font-italic border border-warning row justify-content-center m-5 p-5"> {joke} </div> }
+              </div>
+              
+             
+             
              
               
 

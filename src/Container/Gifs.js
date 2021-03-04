@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 
 export const Gifs = () => {
     const [gifs,setGifs] = useState([])
     const [search,setSearch] = useState("")
     const [loading,setLoading] = useState(true)
+    const [suggestions,setSuggestions] = useState('')
     
     const fetchAPI = async (url) => {
       let response = await fetch(url)
@@ -33,6 +35,7 @@ export const Gifs = () => {
     const onChange = (e) => {
            let inputValue = e.target.value
            setSearch(inputValue)
+           getSuggestions()
     }
 
 
@@ -40,6 +43,15 @@ export const Gifs = () => {
         setGifs([])
        fetchAPI(`http://api.giphy.com/v1/gifs/search?api_key=E5RM8Zgl4lCemTo228dldFw1CYWPg9Go&q=${search}&limit=10`)
        
+    }
+
+   const  getSuggestions = () => {
+      axios.get(`http://api.giphy.com/v1/tags/related/${search}?api_key=E5RM8Zgl4lCemTo228dldFw1CYWPg9Go&q`)
+      .then(({data}) => {
+        const suggestions = data.data.map(suggestion => <h3>{suggestion.name}</h3> )
+        setSuggestions(suggestions)
+      })
+    
     }
   return  (
 
@@ -53,7 +65,9 @@ export const Gifs = () => {
             </div>
                <div className="col-6"></div>
             </div>
-       
+       <ul>
+       {suggestions}
+       </ul>
         
    
   { !loading ? <div> {gifs}</div> 
@@ -64,3 +78,10 @@ export const Gifs = () => {
   )
   
 };
+
+const Suggestions = (props) => {
+  const options = props.results.map(r => (
+    <li key={r.id}>{r.name}</li>
+  ))
+  return <ul>{options}</ul>
+}

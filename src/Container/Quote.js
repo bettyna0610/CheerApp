@@ -63,7 +63,8 @@ export const Quote = () => {
                 <button onClick={getQuoteOfDay} className="btn btn-warning ">Get a quote:</button> 
                 </div>
                 <div className="col-9">
-               { quoteDay}
+                    <div className="rounded font-italic border border-warning"> { quoteDay}</div>
+              
                 </div>
             
             </div>
