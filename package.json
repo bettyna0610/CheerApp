@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
+    "react-autosuggest": "^10.1.0",
     "react-paginate": "^7.1.0",
     "react-router-dom": "^5.2.0"
   }
